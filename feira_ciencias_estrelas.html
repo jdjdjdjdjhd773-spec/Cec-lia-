@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <title>Feira de Ciências: Do que são feitas as estrelas?</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%); }
+    .glass-card { background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255,255,255,.15); }
+    .rainbow-bar { background: linear-gradient(to right,#4c1d95,#2563eb,#06b6d4,#10b981,#eab308,#f97316,#ef4444); }
+    .tv-glow { box-shadow: 0 0 50px rgba(99,102,241,.4); }
+    @keyframes pulse-slow { 0%,100% { opacity:1 } 50% { opacity:.6 } }
+    .animate-pulse-slow { animation: pulse-slow 3s infinite ease-in-out; }
+    .option-btn { width:100%; text-align:left; padding:1rem; border:1px solid #334155; background:rgba(15,23,42,.75); border-radius:.75rem; transition:.2s; }
+    .option-btn:hover:not(:disabled) { border-color:#818cf8; background:rgba(49,46,129,.35); }
+    .option-btn:disabled { cursor:default; }
+    .option-correct { border-color:#10b981!important; background:rgba(6,78,59,.45)!important; }
+    .option-wrong { border-color:#ef4444!important; background:rgba(127,29,29,.4)!important; }
+    .tv-slide { animation: slide-in .35s ease-out; }
+    @keyframes slide-in { from { opacity:0; transform:translateY(12px) } to { opacity:1; transform:translateY(0) } }
+    button:focus-visible { outline:2px solid #a5b4fc; outline-offset:3px; }
+  </style>
+</head>
+<body class="gradient-bg text-slate-100 min-h-screen pb-16">
+<header class="border-b border-slate-800 bg-slate-900/95 sticky top-0 z-50 shadow-lg">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
+    <div class="flex items-center space-x-3">
+      <div class="p-2 bg-indigo-600 rounded-lg shadow-lg"><i class="fa-solid fa-star text-amber-300 text-xl"></i></div>
+      <div><h1 class="text-lg font-bold text-white leading-tight">Feira de Ciências • 7º Ano</h1><p class="text-xs text-indigo-300">A descoberta estelar de Cecilia Payne</p></div>
+    </div>
+    <nav class="flex flex-wrap items-center gap-2 text-sm font-medium" aria-label="Navegação principal">
+      <button onclick="switchTab('cartaz')" id="btn-cartaz" class="px-4 py-2 rounded-lg bg-indigo-600 text-white transition">Cartaz Interativo</button>
+      <button onclick="switchTab('video')" id="btn-video" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition"><i class="fa-solid fa-play text-red-400 mr-1"></i>Vídeos Educativos</button>
+      <button onclick="switchTab('quiz')" id="btn-quiz" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition"><i class="fa-solid fa-graduation-cap text-emerald-400 mr-1"></i>Quiz Interativo</button>
+      <button onclick="openTvMode()" class="px-4 py-2 rounded-lg bg-gradient-to-r from-red-600 to-amber-600 text-white font-bold hover:brightness-110 transition shadow-lg"><i class="fa-solid fa-tv mr-1"></i>Modo Apresentação (TV)</button>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 mt-8">
+  <section id="sec-cartaz" class="space-y-8">
+    <div class="text-center max-w-2xl mx-auto mb-6">
+      <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs font-semibold uppercase tracking-wider">Visualização Interativa</span>
+      <h2 class="text-3xl font-extrabold text-white mt-3">Do que são feitas as estrelas?</h2>
+      <p class="text-slate-400 mt-2">Como Cecilia Payne revolucionou a astronomia revelando a composição das estrelas.</p>
+    </div>
+    <div class="max-w-4xl mx-auto glass-card rounded-3xl p-6 sm:p-10 border-2 border-indigo-500/30 shadow-2xl space-y-8">
+      <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-6 rounded-2xl border border-indigo-400/30 text-center shadow-lg">
+        <div class="inline-block p-3 bg-indigo-600/30 rounded-full mb-3 border border-indigo-400/40"><i class="fa-solid fa-user-astronaut text-3xl text-indigo-300"></i></div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white tracking-wide uppercase">O Descobrimento das Estrelas</h2>
+        <p class="text-indigo-300 text-sm font-semibold mt-1">A revolução científica de Cecilia Payne em 1925</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <article class="bg-slate-900/80 p-6 rounded-2xl border border-slate-700 flex flex-col justify-between gap-4">
+          <div><div class="flex items-center gap-3 mb-3"><span class="w-8 h-8 rounded-full bg-blue-600 font-bold flex items-center justify-center">1</span><h3 class="font-bold text-white text-lg">O código de barras da luz</h3></div>
+          <p class="text-sm text-slate-300 mb-4">Ao separar a luz de uma estrela com um instrumento chamado espectroscópio, surgem linhas espectrais. Elas ajudam cientistas a identificar os elementos químicos presentes.</p></div>
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center gap-2"><div class="w-9 h-9 shrink-0 rounded-full bg-yellow-400 flex items-center justify-center text-slate-900 font-bold text-xs">Sol</div><div class="h-1 bg-yellow-300 flex-1"></div><div class="text-cyan-300 text-xl">◀</div><div class="h-5 flex-1 rainbow-bar rounded relative"><span class="absolute inset-y-0 left-[20%] w-0.5 bg-black"></span><span class="absolute inset-y-0 left-[45%] w-1 bg-black"></span><span class="absolute inset-y-0 left-[70%] w-0.5 bg-black"></span></div></div>
+            <p class="text-xs text-center text-slate-400">Linhas espectrais: pistas sobre a composição da estrela</p>
+          </div>
+        </article>
+        <article class="bg-slate-900/80 p-6 rounded-2xl border border-slate-700 flex flex-col justify-between gap-4">
+          <div><div class="flex items-center gap-3 mb-3"><span class="w-8 h-8 rounded-full bg-amber-600 font-bold flex items-center justify-center">2</span><h3 class="font-bold text-white text-lg">Mito vs. realidade</h3></div>
+          <p class="text-sm text-slate-300 mb-4">Em 1925, Cecilia Payne mostrou que o hidrogênio e o hélio são muito mais abundantes nas estrelas do que muitos astrônomos imaginavam.</p></div>
+          <div class="grid grid-cols-2 gap-3 text-center">
+            <div class="bg-red-950/30 border border-red-500/30 p-3 rounded-xl"><span class="text-[10px] font-bold text-red-400 uppercase">Ideia anterior</span><div class="my-1 text-xl">🪨 ⚙️</div><p class="text-[11px] text-slate-300">Elementos conhecidos, mas proporções mal compreendidas</p></div>
+            <div class="bg-emerald-950/30 border border-emerald-500/30 p-3 rounded-xl"><span class="text-[10px] font-bold text-emerald-400 uppercase">Descoberta</span><div class="my-1 text-xl">☀️ ✨</div><p class="text-[11px] text-slate-300">Hidrogênio e hélio predominam</p></div>
+          </div>
+        </article>
+      </div>
+      <article class="bg-slate-900/80 p-6 rounded-2xl border border-slate-700">
+        <div class="flex items-center gap-3 mb-4"><span class="w-8 h-8 rounded-full bg-purple-600 font-bold flex items-center justify-center">3</span><h3 class="font-bold text-white text-lg">Composição aproximada do Sol</h3></div>
+        <p class="text-xs text-slate-400 mb-4">Por número de átomos, aproximadamente; os valores variam conforme a forma de medir e arredondar.</p>
+        <div class="space-y-4">
+          <div><div class="flex justify-between text-xs font-semibold mb-1"><span class="text-blue-400"><i class="fa-solid fa-atom mr-1"></i>Hidrogênio (H)</span><span class="text-blue-400">~ 91%</span></div><div class="w-full bg-slate-800 h-4 rounded-full overflow-hidden"><div class="bg-blue-500 h-full rounded-full" style="width:91%"></div></div></div>
+          <div><div class="flex justify-between text-xs font-semibold mb-1"><span class="text-amber-400"><i class="fa-solid fa-fire mr-1"></i>Hélio (He)</span><span class="text-amber-400">~ 9%</span></div><div class="w-full bg-slate-800 h-4 rounded-full overflow-hidden"><div class="bg-amber-500 h-full rounded-full" style="width:9%"></div></div></div>
+        </div>
+        <p class="text-xs text-slate-400 mt-4">Por massa, a proporção é diferente: o hidrogênio representa cerca de 74% e o hélio cerca de 24%.</p>
+      </article>
+      <article class="bg-indigo-950/40 p-6 rounded-2xl border border-indigo-500/30">
+        <h3 class="font-bold text-lg mb-2"><i class="fa-solid fa-user-graduate text-indigo-300 mr-2"></i>Quem foi Cecilia Payne?</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Cecilia Payne-Gaposchkin foi uma astrônoma que, em sua tese de doutorado de 1925, aplicou a física dos átomos aos espectros estelares e demonstrou a enorme abundância de hidrogênio e hélio nas estrelas. Seu trabalho foi fundamental para a astrofísica moderna.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="sec-video" class="hidden space-y-8">
+    <div class="text-center max-w-2xl mx-auto mb-6"><span class="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-xs font-semibold uppercase tracking-wider">Galeria de vídeos</span><h2 class="text-3xl font-extrabold text-white mt-3">A história e a ciência de Cecilia Payne</h2><p class="text-slate-400 mt-2">Abra os vídeos para aprender mais sobre a descoberta e a luz das estrelas.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <article class="glass-card rounded-3xl p-6 border border-red-500/30 shadow-2xl space-y-4">
+        <div class="flex items-center gap-2 text-red-400 font-bold text-sm"><i class="fa-solid fa-film"></i><span>Vídeo 1: A história de Cecilia Payne</span></div>
+        <div class="aspect-video w-full rounded-2xl overflow-hidden border border-slate-700 bg-black"><iframe class="w-full h-full" src="https://www.youtube-nocookie.com/embed/WilvSazX3GM?rel=0" title="A verdadeira descobridora da composição do Sol - Cecilia Payne" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-sm text-slate-300"><p class="font-semibold text-white mb-1">A descoberta do Sol rico em hidrogênio</p>Conheça a contribuição de Cecilia Payne e os desafios que enfrentou na carreira científica.</div>
+        <a class="inline-block text-sm text-indigo-300 underline" href="https://www.youtube.com/watch?v=WilvSazX3GM" target="_blank" rel="noopener noreferrer">Abrir no YouTube</a>
+      </article>
+      <article class="glass-card rounded-3xl p-6 border border-indigo-500/30 shadow-2xl space-y-4">
+        <div class="flex items-center gap-2 text-indigo-400 font-bold text-sm"><i class="fa-solid fa-atom"></i><span>Vídeo 2: Espectroscopia</span></div>
+        <div class="aspect-video w-full rounded-2xl overflow-hidden border border-slate-700 bg-black"><iframe class="w-full h-full" src="https://www.youtube-nocookie.com/embed/n33I3w9U-c4?rel=0" title="Espectro da luz e estrelas" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-sm text-slate-300"><p class="font-semibold text-white mb-1">O código de barras da luz</p>Veja como a luz pode ser separada em cores e como as linhas espectrais revelam informações sobre as estrelas.</div>
+        <a class="inline-block text-sm text-indigo-300 underline" href="https://www.youtube.com/watch?v=n33I3w9U-c4" target="_blank" rel="noopener noreferrer">Abrir no YouTube</a>
+      </article>
+    </div>
+    <p class="text-center text-xs text-slate-400">Se algum vídeo não carregar, use o link “Abrir no YouTube”.</p>
+  </section>
+
+  <section id="sec-quiz" class="hidden space-y-8">
+    <div class="text-center max-w-2xl mx-auto mb-6"><span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-xs font-semibold uppercase tracking-wider">Teste de conhecimentos</span><h2 class="text-3xl font-extrabold text-white mt-3">Quiz: Do que são feitas as estrelas?</h2><p class="text-slate-400 mt-2">Responda a quatro perguntas e veja sua pontuação.</p></div>
+    <div class="max-w-3xl mx-auto glass-card rounded-3xl p-6 sm:p-8 border border-emerald-500/30 shadow-2xl">
+      <div id="quiz-container">
+        <div class="flex justify-between items-center border-b border-slate-800 pb-4 mb-6 gap-3"><span id="quiz-progress" class="text-xs font-bold text-emerald-400 uppercase">Questão 1 de 4</span><span id="quiz-score" class="text-xs font-semibold bg-slate-800 px-3 py-1 rounded-full text-slate-300">Pontuação: 0</span></div>
+        <div class="w-full bg-slate-800 rounded-full h-2 mb-6"><div id="quiz-progress-bar" class="bg-emerald-500 h-2 rounded-full transition-all" style="width:25%"></div></div>
+        <h3 id="quiz-question" class="text-xl font-bold text-white mb-6">Carregando pergunta...</h3>
+        <div id="quiz-options" class="space-y-3"></div>
+        <div id="quiz-feedback" class="mt-6 p-4 rounded-xl hidden text-sm font-medium leading-relaxed" aria-live="polite"></div>
+        <div class="mt-6 flex justify-between items-center border-t border-slate-800 pt-4 gap-4"><button id="quiz-hint-btn" onclick="showQuizHint()" class="text-xs text-indigo-300 hover:text-indigo-200"><i class="fa-solid fa-lightbulb mr-1.5 text-amber-400"></i>Ver dica</button><button id="quiz-next-btn" onclick="nextQuestion()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition hidden">Próxima pergunta <i class="fa-solid fa-arrow-right ml-1"></i></button></div>
+        <p id="quiz-hint-text" class="text-xs text-amber-300 italic mt-3 hidden bg-amber-950/40 p-3 rounded-lg border border-amber-800/50"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="tv-modal" class="fixed inset-0 bg-slate-950 z-[100] hidden flex-col justify-between overflow-y-auto" role="dialog" aria-modal="true" aria-label="Modo apresentação">
+  <div class="bg-slate-900 border-b border-indigo-500/40 p-4 flex justify-between items-center gap-3">
+    <div class="flex items-center gap-3 min-w-0"><span class="relative inline-flex h-3 w-3 shrink-0 rounded-full bg-red-500"></span><span class="bg-red-600/20 text-red-400 border border-red-500/40 text-xs px-2.5 py-1 rounded font-bold uppercase tracking-wider">Modo TV • Exposição</span><h2 class="text-sm font-bold text-white hidden sm:block">Feira de Ciências — A composição estelar</h2></div>
+    <button onclick="closeTvMode()" class="px-3 py-2 bg-slate-800 hover:bg-red-900/60 text-slate-300 hover:text-white rounded-lg border border-slate-700 text-xs font-bold shrink-0"><i class="fa-solid fa-xmark mr-1"></i>Sair da TV</button>
+  </div>
+  <div class="flex-1 p-6 md:p-12 flex flex-col justify-center items-center relative max-w-5xl mx-auto w-full text-center">
+    <div id="tv-slide-0" class="tv-slide space-y-6"><span class="px-4 py-1.5 bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 rounded-full text-xs font-bold uppercase tracking-widest">Apresentação principal</span><h1 class="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight">DO QUE SÃO FEITAS AS ESTRELAS?</h1><p class="text-xl text-indigo-200 font-medium max-w-2xl mx-auto">A descoberta de Cecilia Payne que mudou nossa compreensão da composição das estrelas.</p><div class="text-6xl mt-8">🌌 ✨ ☀️</div></div>
+    <div id="tv-slide-1" class="tv-slide space-y-6 hidden w-full"><span class="px-4 py-1.5 bg-blue-500/20 text-blue-300 border border-blue-400/30 rounded-full text-xs font-bold uppercase tracking-widest">Etapa 1</span><h2 class="text-3xl md:text-5xl font-extrabold text-white">Quem foi Cecilia Payne?</h2><div class="bg-slate-900/90 border border-slate-800 p-8 rounded-3xl max-w-3xl mx-auto shadow-2xl text-left space-y-4"><p class="text-lg text-slate-200">Cecilia Payne-Gaposchkin foi uma astrônoma que estudou a luz das estrelas para descobrir de quais elementos elas são compostas.</p><p class="text-lg text-slate-300">Em 1925, sua tese apresentou evidências de que o hidrogênio e o hélio são os elementos mais abundantes nas estrelas.</p></div></div>
+    <div id="tv-slide-2" class="tv-slide space-y-6 hidden w-full"><span class="px-4 py-1.5 bg-amber-500/20 text-amber-300 border border-amber-400/30 rounded-full text-xs font-bold uppercase tracking-widest">Etapa 2</span><h2 class="text-3xl md:text-5xl font-extrabold text-white">A assinatura da luz</h2><div class="bg-slate-900/90 border border-slate-800 p-6 md:p-8 rounded-3xl max-w-3xl mx-auto shadow-2xl space-y-5"><p class="text-lg text-slate-300">Quando a luz é separada em um espectro, aparecem linhas que funcionam como pistas para identificar os elementos químicos.</p><div class="rainbow-bar h-12 rounded-xl relative"><span class="absolute inset-y-0 left-[18%] w-1 bg-black"></span><span class="absolute inset-y-0 left-[42%] w-1 bg-black"></span><span class="absolute inset-y-0 left-[73%] w-1 bg-black"></span></div><p class="text-sm text-slate-400">Espectroscopia: estudar a luz para conhecer as estrelas.</p></div></div>
+    <div id="tv-slide-3" class="tv-slide space-y-6 hidden w-full"><span class="px-4 py-1.5 bg-purple-500/20 text-purple-300 border border-purple-400/30 rounded-full text-xs font-bold uppercase tracking-widest">Etapa 3</span><h2 class="text-3xl md:text-5xl font-extrabold text-white">A verdadeira composição</h2><div class="bg-slate-900/90 border border-slate-800 p-6 md:p-8 rounded-3xl max-w-3xl mx-auto shadow-2xl space-y-6 text-left"><div><div class="flex justify-between mb-2"><span class="text-blue-300 font-bold">Hidrogênio</span><span>~91% dos átomos</span></div><div class="h-5 bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-blue-500 rounded-full" style="width:91%"></div></div></div><div><div class="flex justify-between mb-2"><span class="text-amber-300 font-bold">Hélio</span><span>~9% dos átomos</span></div><div class="h-5 bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-amber-500 rounded-full" style="width:9%"></div></div></div><p class="text-sm text-slate-400">Valores aproximados por número de átomos; por massa, as proporções são diferentes.</p></div></div>
+    <div id="tv-slide-4" class="tv-slide space-y-6 hidden w-full"><span class="px-4 py-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full text-xs font-bold uppercase tracking-widest">Conclusão</span><h2 class="text-3xl md:text-5xl font-extrabold text-white">Por que essa descoberta importa?</h2><div class="bg-slate-900/90 border border-slate-800 p-8 rounded-3xl max-w-3xl mx-auto text-left space-y-4"><p class="text-lg text-slate-200">Cecilia Payne mostrou como a física e a análise da luz podem revelar do que são feitas estrelas muito distantes.</p><p class="text-lg text-indigo-200 font-semibold">A luz das estrelas carrega informações sobre o Universo!</p></div><p class="text-slate-400">Obrigado pela atenção!</p></div>
+  </div>
+  <div class="bg-slate-900 border-t border-slate-800 p-4 sm:px-8 flex items-center justify-between gap-4">
+    <button id="tv-prev" onclick="changeSlide(-1)" class="px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed" disabled><i class="fa-solid fa-arrow-left mr-2"></i>Anterior</button>
+    <div class="text-center"><p id="tv-counter" class="text-sm font-bold text-indigo-200">Slide 1 de 5</p><p class="text-xs text-slate-500 mt-1">Use as setas do teclado para navegar</p></div>
+    <button id="tv-next" onclick="changeSlide(1)" class="px-4 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 font-bold">Próximo<i class="fa-solid fa-arrow-right ml-2"></i></button>
+  </div>
+</div>
+
+<footer class="max-w-6xl mx-auto px-4 mt-12 text-center text-xs text-slate-500"><p>Feira de Ciências • 7º Ano • Astronomia e espectroscopia</p><p class="mt-1">Material educativo. Valores apresentados são aproximados.</p></footer>
+
+<script>
+  const tabs = ['cartaz', 'video', 'quiz'];
+
+  function switchTab(tab) {
+    if (!tabs.includes(tab)) return;
+    tabs.forEach(name => {
+      document.getElementById(`sec-${name}`).classList.toggle('hidden', name !== tab);
+      const button = document.getElementById(`btn-${name}`);
+      button.classList.toggle('bg-indigo-600', name === tab);
+      button.classList.toggle('text-white', name === tab);
+      button.classList.toggle('bg-slate-800', name !== tab);
+      button.classList.toggle('text-slate-300', name !== tab);
+    });
+    if (tab === 'quiz' && !quizStarted) {
+      quizStarted = true;
+      renderQuestion();
+    }
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  const questions = [
+    {
+      q: 'Qual foi uma das grandes contribuições de Cecilia Payne?',
+      options: ['Descobrir um novo planeta do Sistema Solar', 'Demonstrar a abundância de hidrogênio e hélio nas estrelas', 'Inventar o primeiro telescópio', 'Descobrir a gravidade'],
+      answer: 1,
+      hint: 'Sua pesquisa estudou a composição química das estrelas.',
+      explanation: 'Correto! A tese de Cecilia Payne, de 1925, mostrou que hidrogênio e hélio são extremamente abundantes nas estrelas.'
+    },
+    {
+      q: 'O que as linhas espectrais ajudam os astrônomos a descobrir?',
+      options: ['A idade exata de cada pessoa', 'A distância entre todas as galáxias sem medir nada', 'Quais elementos químicos estão presentes em uma estrela', 'O formato dos continentes'],
+      answer: 2,
+      hint: 'Pense no “código de barras” que a luz pode apresentar.',
+      explanation: 'Isso mesmo! Cada elemento produz padrões característicos de linhas espectrais.'
+    },
+    {
+      q: 'Quais são os dois elementos mais abundantes no Sol?',
+      options: ['Ferro e ouro', 'Oxigênio e carbono', 'Hidrogênio e hélio', 'Prata e nitrogênio'],
+      answer: 2,
+      hint: 'Um é o elemento químico mais simples; o outro vem logo depois dele na tabela periódica.',
+      explanation: 'Correto! O Sol é composto principalmente de hidrogênio e hélio.'
+    },
+    {
+      q: 'Em que ano Cecilia Payne apresentou sua famosa tese sobre as estrelas?',
+      options: ['1492', '1925', '1969', '2001'],
+      answer: 1,
+      hint: 'Foi na primeira metade do século XX.',
+      explanation: 'Muito bem! Sua tese foi apresentada em 1925 e se tornou um marco da astrofísica.'
+    }
+  ];
+
+  let questionIndex = 0;
+  let score = 0;
+  let answered = false;
+  let quizStarted = false;
+
+  function renderQuestion() {
+    const item = questions[questionIndex];
+    answered = false;
+    document.getElementById('quiz-progress').textContent = `Questão ${questionIndex + 1} de ${questions.length}`;
+    document.getElementById('quiz-score').textContent = `Pontuação: ${score}`;
+    document.getElementById('quiz-progress-bar').style.width = `${((questionIndex + 1) / questions.length) * 100}%`;
+    document.getElementById('quiz-question').textContent = item.q;
+    document.getElementById('quiz-feedback').className = 'mt-6 p-4 rounded-xl hidden text-sm font-medium leading-relaxed';
+    document.getElementById('quiz-feedback').textContent = '';
+    document.getElementById('quiz-hint-text').classList.add('hidden');
+    document.getElementById('quiz-hint-text').textContent = '';
+    document.getElementById('quiz-hint-btn').disabled = false;
+    document.getElementById('quiz-hint-btn').classList.remove('opacity-40');
+    const next = document.getElementById('quiz-next-btn');
+    next.classList.add('hidden');
+    next.textContent = questionIndex === questions.length - 1 ? 'Ver resultado' : 'Próxima pergunta';
+    const options = document.getElementById('quiz-options');
+    options.innerHTML = '';
+    item.options.forEach((option, index) => {
+      const button = document.createElement('button');
+      button.className = 'option-btn text-slate-200';
+      button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+      button.addEventListener('click', () => chooseAnswer(index, button));
+      options.appendChild(button);
+    });
+  }
+
+  function chooseAnswer(index, selectedButton) {
+    if (answered) return;
+    answered = true;
+    const item = questions[questionIndex];
+    const buttons = [...document.querySelectorAll('#quiz-options button')];
+    buttons.forEach((button, i) => {
+      button.disabled = true;
+      if (i === item.answer) button.classList.add('option-correct');
+    });
+    const feedback = document.getElementById('quiz-feedback');
+    if (index === item.answer) {
+      score++;
+      selectedButton.classList.add('option-correct');
+      feedback.className = 'mt-6 p-4 rounded-xl text-sm font-medium leading-relaxed bg-emerald-950/60 border border-emerald-700 text-emerald-200';
+      feedback.textContent = `Resposta correta! ${item.explanation}`;
+    } else {
+      selectedButton.classList.add('option-wrong');
+      feedback.className = 'mt-6 p-4 rounded-xl text-sm font-medium leading-relaxed bg-red-950/50 border border-red-800 text-red-200';
+      feedback.textContent = `Não foi dessa vez. ${item.explanation}`;
+    }
+    document.getElementById('quiz-score').textContent = `Pontuação: ${score}`;
+    document.getElementById('quiz-next-btn').classList.remove('hidden');
+    document.getElementById('quiz-hint-btn').disabled = true;
+    document.getElementById('quiz-hint-btn').classList.add('opacity-40');
+  }
+
+  function showQuizHint() {
+    if (answered) return;
+    const hint = document.getElementById('quiz-hint-text');
+    hint.textContent = `Dica: ${questions[questionIndex].hint}`;
+    hint.classList.remove('hidden');
+  }
+
+  function nextQuestion() {
+    if (!answered) return;
+    if (questionIndex < questions.length - 1) {
+      questionIndex++;
+      renderQuestion();
+    } else {
+      showQuizResult();
+    }
+  }
+
+  function showQuizResult() {
+    const container = document.getElementById('quiz-container');
+    const percentage = Math.round((score / questions.length) * 100);
+    let message = 'Continue estudando: você vai aprender cada vez mais!';
+    if (score === questions.length) message = 'Excelente! Você acertou todas as perguntas!';
+    else if (score >= 3) message = 'Muito bem! Você entendeu os principais conceitos.';
+    container.innerHTML = `
+      <div class="text-center py-8">
+        <div class="text-5xl mb-4">${score === questions.length ? '🏆' : '🚀'}</div>
+        <h3 class="text-2xl font-extrabold text-white mb-3">Quiz concluído!</h3>
+        <p class="text-slate-300 mb-2">${message}</p>
+        <p class="text-4xl font-black text-emerald-300 my-5">${score}/${questions.length}</p>
+        <p class="text-sm text-slate-400 mb-6">Você acertou ${percentage}% das perguntas.</p>
+        <button onclick="restartQuiz()" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl font-bold text-white"><i class="fa-solid fa-rotate-right mr-2"></i>Jogar novamente</button>
+      </div>`;
+  }
+
+  function restartQuiz() {
+    questionIndex = 0;
+    score = 0;
+    answered = false;
+    document.getElementById('quiz-container').innerHTML = `
+      <div class="flex justify-between items-center border-b border-slate-800 pb-4 mb-6 gap-3"><span id="quiz-progress" class="text-xs font-bold text-emerald-400 uppercase"></span><span id="quiz-score" class="text-xs font-semibold bg-slate-800 px-3 py-1 rounded-full text-slate-300"></span></div>
+      <div class="w-full bg-slate-800 rounded-full h-2 mb-6"><div id="quiz-progress-bar" class="bg-emerald-500 h-2 rounded-full transition-all"></div></div>
+      <h3 id="quiz-question" class="text-xl font-bold text-white mb-6"></h3><div id="quiz-options" class="space-y-3"></div>
+      <div id="quiz-feedback" class="mt-6 p-4 rounded-xl hidden text-sm font-medium leading-relaxed" aria-live="polite"></div>
+      <div class="mt-6 flex justify-between items-center border-t border-slate-800 pt-4 gap-4"><button id="quiz-hint-btn" onclick="showQuizHint()" class="text-xs text-indigo-300"><i class="fa-solid fa-lightbulb mr-1.5 text-amber-400"></i>Ver dica</button><button id="quiz-next-btn" onclick="nextQuestion()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl hidden">Próxima pergunta</button></div>
+      <p id="quiz-hint-text" class="text-xs text-amber-300 italic mt-3 hidden bg-amber-950/40 p-3 rounded-lg border border-amber-800/50"></p>`;
+    renderQuestion();
+  }
+
+  const tvModal = document.getElementById('tv-modal');
+  const totalSlides = 5;
+  let currentSlide = 0;
+  let previouslyFocused = null;
+
+  function openTvMode() {
+    previouslyFocused = document.activeElement;
+    currentSlide = 0;
+    updateSlide();
+    tvModal.classList.remove('hidden');
+    tvModal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('tv-prev').focus();
+  }
+
+  function closeTvMode() {
+    tvModal.classList.add('hidden');
+    tvModal.classList.remove('flex');
+    document.body.style.overflow = '';
+    if (previouslyFocused && previouslyFocused.focus) previouslyFocused.focus();
+  }
+
+  function changeSlide(direction) {
+    currentSlide = Math.max(0, Math.min(totalSlides - 1, currentSlide + direction));
+    updateSlide();
+  }
+
+  function updateSlide() {
+    for (let i = 0; i < totalSlides; i++) {
+      const slide = document.getElementById(`tv-slide-${i}`);
+      slide.classList.toggle('hidden', i !== currentSlide);
+    }
+    document.getElementById('tv-counter').textContent = `Slide ${currentSlide + 1} de ${totalSlides}`;
+    document.getElementById('tv-prev').disabled = currentSlide === 0;
+    const next = document.getElementById('tv-next');
+    next.disabled = currentSlide === totalSlides - 1;
+    next.innerHTML = currentSlide === totalSlides - 1 ? 'Fim <i class="fa-solid fa-check ml-2"></i>' : 'Próximo <i class="fa-solid fa-arrow-right ml-2"></i>';
+    next.classList.toggle('opacity-40', currentSlide === totalSlides - 1);
+  }
+
+  document.addEventListener('keydown', event => {
+    if (tvModal.classList.contains('hidden')) return;
+    if (event.key === 'ArrowRight' || event.key === 'PageDown') {
+      event.preventDefault();
+      changeSlide(1);
+    } else if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+      event.preventDefault();
+      changeSlide(-1);
+    } else if (event.key === 'Escape') {
+      closeTvMode();
+    }
+  });
+</script>
+</body>
+</html>
